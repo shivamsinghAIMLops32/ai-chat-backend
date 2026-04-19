@@ -1,6 +1,10 @@
 import { Agent, run, tool } from "@openai/agents";
 import { z } from "zod";
 
+
+const outputType = z.object({
+  finalOutput: z.string().describe("The final answer to the user's query")
+})
 // Define the weather tool using Open-Meteo API 
 const getWeatherTool = tool({
   name: "get_weather",
@@ -38,8 +42,9 @@ const agent = new Agent({
   name: "Weather Agent",
   instructions:
     "You are a helpful weather assistant. Use the tools provided to answer weather-related queries.",
-  model: "google/gemma-4-e2b", 
+  model: "nvidia/nemotron-3-nano-4b", 
   tools: [getWeatherTool],
+  outputType: outputType
 });
 
 const result = await run(agent, "What is the weather like in Paris,korea,delhi?");
