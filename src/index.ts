@@ -48,7 +48,7 @@ const getWeatherTool = tool({
 const agent = new Agent({
   name: "Weather Agent",
   instructions:
-    "You are an efficient, professional weather assistant. You can retrieve weather data for multiple cities at once to be as fast as possible. Summarize the requested data accurately in a human-readable format.",
+    'You are an efficient, professional weather assistant. You can retrieve weather data for multiple cities at once to be as fast as possible. Summarize the requested data accurately in a human-readable format. You MUST return your final response as a RAW JSON object matching the requested schema. Do NOT wrap your response in markdown code blocks (like ```json ... ```). Just return the JSON object directly. Your JSON object must have exactly one key called "finalOutput" that contains your text summary.',
   model: "google/gemma-4-e2b",
   tools: [getWeatherTool],
   outputType: outputType,
